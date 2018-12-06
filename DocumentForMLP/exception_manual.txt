@@ -1,0 +1,20 @@
+python預定的exception:
+  import builtins
+  dir(builtins)
+
+自訂例外:
+  class SomeError(Exception)  繼承Exception,而非BaseException(其為Exception的父類別)
+    pass
+
+  假設無設定建構式__init__,會使用Exception繼承下的__init__方法(以tuple來設定arg)
+
+  覆寫__init__ and __str__
+
+ex.
+class OtherError(Exception):
+     def __init__(self, cause, message):
+         super(Exception, self).__init__(cause, message)
+         self.cause = cause
+         self.message = message
+     def __str__(self):
+        return self.cause + ': ' + self.message

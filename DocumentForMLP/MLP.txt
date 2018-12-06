@@ -1,0 +1,53 @@
+參考https://medium.com/@chih.sheng.huang821/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E5%90%AB%E8%A9%B3%E7%B4%B0%E6%8E%A8%E5%B0%8E-ee4f3d5d1b41
+
+輸入層-->隱藏層 -->輸出層
+
+ex. n筆樣本 每筆樣本對應m個輸出值 中間夾雜一層p個hidden node
+
+前向傳遞(forward propagation):
+從輸入層->隱藏層 (公式與圖查看 mlp-forward)
+
+加權(查看 mlp-forward-func)
+並經過激活函數(activation)取得hidden node (查看 mlp-forward-activation)
+
+隱藏層->輸出層(mlp-forward-output)
+加權(查看 mlp-forward-weight)
+激活函數推估輸出層 (查看 mlp-forward-active)
+
+反向傳遞 (Backward propagation):
+利用最後的目標函數(loss/cost function)來進行參數的更新，
+一般來說都是用誤差均方和(mean square error)當作目標函數，
+需要繼續學習，直到參數或是誤差值收斂。
+
+第i筆資料對應的每個輸出值(查看mlp-backward)
+
+目標誤差值(查看mlp-backward-loss)
+
+所有樣本的誤差和,作為目標函數(查看mlp-backward-losssum)
+
+所有樣本的誤差均方和(查看mlp-backward-average)
+
+微分方程(查看mlp-backward-func)
+
+梯度下降法找最佳參數解,η為學習率(learning rate)(查看mlp-backward-gradient)
+
+微分解(查看mlp-backward-pass)
+
+輸出層->隱藏層(查看mlp-backward-pic)
+chain rule
+  第一項(查看mlp-backward-chain1)
+  第二項(查看mlp-backward-chain2)
+  合併(查看mlp-backward-chainsum)
+
+隱藏層->輸入層(查看mlp-backward-pic2)
+chain rule
+  第一項 (查看mlp-backward-chain1)
+  第二項 (查看mlp-backward-chain4)
+  第三項 (查看mlp-backward-chain5)
+  合併 (查看mlp-backward-chainsum2)
+
+最後把n個樣本的梯度加起來(查看mlp-backward-last)
+
+p.s 非線性轉換/激活函數(f1,f2)在倒傳遞時都有微分，所以在選擇激活函數時必須要選擇可微分函數。
+
+最後帶入MLP內的前向傳遞 (Forward propagation)即可得到最後的預測值

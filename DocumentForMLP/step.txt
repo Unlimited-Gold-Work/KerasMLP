@@ -1,0 +1,7 @@
+讀取圖片  imread--> nparray
+  dict格式-- batch_label 表達基本訊息
+	     labels data對應類別  list
+	     data 圖片像素值  list
+	     filenames 文檔名 list
+
+將所有圖片檔壓縮

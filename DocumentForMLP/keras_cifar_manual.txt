@@ -1,0 +1,53 @@
+keras API:https://keras.io/getting-started/sequential-model-guide/
+
+keras模型建立:https://www.cnblogs.com/q735613050/p/8227446.html
+
+epoch&batch_size
+https://www.jiqizhixin.com/articles/2017-09-25-3
+
+keras load_data
+參考https://stackoverflow.com/questions/35074549/how-to-load-a-model-from-an-hdf5-file-in-keras
+
+載檔網址https://www.cs.toronto.edu/~kriz/cifar.html
+pickle讀取:https://hk.saowen.com/a/ccbf6c9c10595e9677b65cddd1ec3be1fbf6c242dec9999a55d9e8b35d11f499
+keras-cifar程式參考 https://blog.csdn.net/shadow_guo/article/details/48995081?utm_source=blogxgwz8
+
+MLP建model
+可參考http://yhhuang1966.blogspot.com/2018/04/keras-mlp-cifar-10.html
+https://medium.com/@chih.sheng.huang821/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-%E5%A4%9A%E5%B1%A4%E6%84%9F%E7%9F%A5%E6%A9%9F-multilayer-perceptron-mlp-%E5%90%AB%E8%A9%B3%E7%B4%B0%E6%8E%A8%E5%B0%8E-ee4f3d5d1b41
+
+CNN model
+可參考https://medium.com/@yehjames/%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90-%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%AC%AC5-1%E8%AC%9B-%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E7%B5%A1%E4%BB%8B%E7%B4%B9-convolutional-neural-network-4f8249d65d4f
+https://medium.com/@chih.sheng.huang821/%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF-convolutional-neural-network-cnn-cnn%E9%81%8B%E7%AE%97%E6%B5%81%E7%A8%8B-ecaec240a631
+http://yhhuang1966.blogspot.com/2018/04/keras-cnn-cifar-10.html
+
+載完解壓縮的檔案:
+data_batch_1~5  是劃分好的訓練數據 每個10000pic
+test_batch	測試集數據	   10000張pic
+batches.meta    可以用相同的方法讀取，裏面存的是一些基本信息。
+  num_cases_per_batch  10000
+  label_names	       ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+  num_vis	       3072 (32x32)
+
+讀取數據 p.s. 這幾個文檔都是通過 pickle 產生的，所以在讀取的時候也要用到這個包
+
+import pickle
+
+def load_file(filename):
+    with open(filename, 'rb') as fo:
+        data = pickle.load(fo, encoding='latin1')
+    return data		# 返回的型態為dic
+
+data = load_file('test_batch')
+print(data.keys())	# 印出key
+
+結果:dict_keys(['batch_label', 'labels', 'data', 'filenames'])
+
+key & value:
+batch_label 對應的值是一個字符串，用來表明當前文檔的一些基本信息
+  ex.data_batch_1 --training batch 1 of 5  test_batch --testing batch 1 of 1
+labels  對應的值是一個長度為10000的列表，每個數字取值範圍 0~9，代表當前圖片所屬類別
+
+data  10000 * 3072 的二維數組，每一行代表一張圖片的像素值。（32*32*3=3072）
+
+filenames  長度為10000的列表，裏面每一項是代表圖片文檔名的字符串。

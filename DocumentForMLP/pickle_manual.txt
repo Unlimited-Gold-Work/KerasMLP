@@ -1,0 +1,43 @@
+參考https://blog.csdn.net/brucewong0516/article/details/79054373
+https://docs.python.org/3/library/pickle.html
+https://blog.csdn.net/coffee_cream/article/details/51754484
+
+cPickle是C語言所寫
+非python程式無法存取pickle(python語言)文件
+
+protocol值越大，dump的速度越快，並且支持的數據類型更多，保存下來的文件空間空間更小
+設定最高版本protocol=pickle.HIGHEST_PROTOCOL
+
+ex.
+# 保存
+
+with open('data.pickle', 'wb') as f:
+
+    pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+# 讀取
+
+with open('data.pickle', 'rb') as f:
+    
+    b = pickle.load(f)
+
+pickle.HIGHEST_PROTOCOL 設protocol定最高版本
+pickle.DEFAULT_PROTOCOL 預設版本
+
+pickle.dump(obj, file, protocol=None, *, fix_imports=True)
+  obj數據資料導入file文件
+  相當於Pickler(file, protocol).dump(obj)
+  0,負數 protocol 設定最高版本,其餘預設版本
+
+pickle.dumps(obj, protocol=None, *, fix_imports=True)
+  將obj物件序列化為string,而非存入文件
+
+pickle.load(file, *, fix_imports=True, encoding="ASCII", errors="strict")
+  相當於Unpickler(file).load()
+  read([int arg]) && readline() 回傳bytes 
+  將file中的物件序列化讀出
+
+pickle.loads(bytes_object, *, fix_imports=True, encoding="ASCII", errors="strict")
+  從string中讀出序列化前的obj物件
+  

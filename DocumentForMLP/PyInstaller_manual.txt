@@ -1,0 +1,30 @@
+參考文獻https://medium.com/pyladies-taiwan/python-%E5%B0%87python%E6%89%93%E5%8C%85%E6%88%90exe%E6%AA%94-32a4bacbe351
+
+將python module打包成exe檔
+
+先執行pyinstaller --> 分析code --> 收集資源(module library interpreter)--> 生成exe
+
+pyinstaller -h 來查看參數
+-F 打包成一個exe文件
+-icon=圖標路徑  設定圖標
+-w 使用視窗,無控制台
+-c 使用控制台,無視窗
+-D 創建一個目錄,包含exe以及其他一些依賴性文件
+
+進度步驟:
+  會先建立xxx.spec檔
+  建立build資料夾
+  建立log紀錄檔與工作檔案於build檔案
+  建立dist資料夾
+  建立.exe於dist資料夾內
+
+參考https://blog.csdn.net/u011533382/article/details/83088491
+發生錯誤AttributeError: 'str' object has no attribute 'items':
+  先將載下的module版本提至最新
+	pip list --outdated  列出過期的module
+	pip install --upgrade [module] 更新過期的module
+
+何謂__pycache__ ?
+  放編譯時需要的檔案用的檔案
+
+編譯不出現的方法：利用python -B foo.py使__ pycache__資料夾不出現

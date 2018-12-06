@@ -1,0 +1,62 @@
+參考https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_tutorials.html
+https://blog.gtwang.org/programming/opencv-basic-image-read-and-write-tutorial/
+https://blog.csdn.net/sunny2038/article/details/9057415
+
+須先行下載  Numpy, Matplotlib(可選擇,但建議安裝)
+
+測試運行
+import cv2
+print(cv2.__version__)
+
+讀取,儲存,展示圖片function,圖片讀取以BGR順序
+cv2.imread()
+  arg1:路徑-->需工作目錄底下或絕對路徑,即使路徑載入失敗也不會顯示錯誤
+	ex. D://Unlimited-Gold-Work//keras20181029//jpg//medicine.jpg
+	print img會顯示None
+  arg2: cv2.IMREAD_COLOR mode為彩色圖層(不含透明),預設 可用數字1
+	cv2.IMREAD_GRAYSCALE 灰色圖層	0
+	cv2.IMREAD_UNCHANGED 彩色包含透明	-1
+  img物件--> numpy.ndarray類別
+cv2.imshow()
+	視窗會配合圖片大小
+  arg1: 設定視窗名字
+  arg2: 圖片物件
+    可顯示多個視窗,但視窗名需不同
+cv2.waitKey()
+  arg1: 等待(毫秒)時間,設定為0,表示持續等待至使用者按下按鍵為止
+  如果使用64bits電腦,則要修正成k = cv2.waitKey(0) & 0xFF
+cv2.destroyAllWindows()
+  破壞(關閉)所有視窗
+cv2.destroyWindow()
+  關閉指定視窗
+  arg1:欲關閉的視窗名
+cv2.namedWindow()
+  arg1:視窗名
+  arg2:預設cv2.WINDOW_AUTOSIZE,設定cv2.WINDOW_NORMAL,可自由調整視窗大小
+cv2.imwrite()
+
+cv2.resize(img,(row,col),interpolation=cv2.INTER_CUBIC)
+
+img.shape
+  回傳tuple (rows,colums,channel)
+img.size
+  回傳總pixels數
+img.dtype
+  回傳image的資料型態
+取得像素,可使用陣列索引方式取得
+
+參考https://matplotlib.org/api/pyplot_api.html
+Matplotlib
+  from matplotlib import pyplot as plt
+  讀取圖片順序為RGB
+  轉換方式:
+	img_rgb = img_bgr[:,:,::-1] or img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+plt.imshow()
+  arg1:圖片物件
+  arg2:圖片mode,colormap ex. cmap='gray'
+  arg3:interpolation = 'bicubic'
+plt.xticks([]), plt.yticks([])  
+# to hide tick values on X and Y axis,隱藏x,y軸
+plt.show()
+  顯示
+  arg2:圖片物件
